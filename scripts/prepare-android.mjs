@@ -16,6 +16,7 @@ if (existsSync(gradle)) {
  if (!g.includes('org.nanohttpd:nanohttpd')) g=g.replace('dependencies {', 'dependencies {\n    implementation "org.nanohttpd:nanohttpd:2.3.1"');
  await writeFile(gradle,g);
 }
+if (existsSync(gradle)) {
 const javaDir=root+'/java/com/greatwy8888/kuaduankuaichuan';
 await mkdir(javaDir,{recursive:true});
 const pluginPath=javaDir+'/LanTransferPlugin.java';
@@ -105,5 +106,6 @@ if (existsSync(activity)) {
    a=a.replace('public class MainActivity extends BridgeActivity {', 'public class MainActivity extends BridgeActivity {\n  @Override public void onCreate(android.os.Bundle savedInstanceState) {\n    registerPlugin(LanTransferPlugin.class);\n    super.onCreate(savedInstanceState);\n  }');
    await writeFile(activity,a);
  }
+}
 }
 console.log('Android assets and native LAN receiver prepared.');
