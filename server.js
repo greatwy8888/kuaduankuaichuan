@@ -4,12 +4,12 @@ const os = require('node:os');
 const path = require('node:path');
 const fs = require('node:fs');
 const http = require('node:http');
-const crypto = require('node:crypto');
 const DATA_DIR = path.join(os.homedir(), 'Documents', '跨端快传');
 const IN_DIR = path.join(DATA_DIR, '收到的文件');
 const SHARE_DIR = path.join(DATA_DIR, '发送到手机');
-for (const d of [IN_DIR, SHARE_DIR]) fs.mkdirSync(d, {recursive:true});
-const upload = multer({ dest: path.join(DATA_DIR, '.uploads'), limits: { fileSize: 2 * 1024 * 1024 * 1024 } });
+const TEMP_DIR = path.join(DATA_DIR, '.uploads');
+for (const d of [IN_DIR, SHARE_DIR, TEMP_DIR]) fs.mkdirSync(d, {recursive:true});
+const upload = multer({ dest: TEMP_DIR, limits: { fileSize: 2 * 1024 * 1024 * 1024 } });
 function safeName(name) { return path.basename(String(name || 'file').replace(/[\\\\/:*?"<>|\x00-\x1f]/g, '_')).slice(0,180) || 'file'; }
 function uniquePath(dir, name) { let p=path.join(dir,name), n=1; const ext=path.extname(name), base=path.basename(name,ext); while(fs.existsSync(p)) p=path.join(dir, base+' ('+(n++)+')'+ext); return p; }
 function listFiles(dir) { return fs.readdirSync(dir,{withFileTypes:true}).filter(e=>e.isFile()&&!e.name.startsWith('.')).map(e=>{const p=path.join(dir,e.name),s=fs.statSync(p);return {name:e.name,size:s.size,mtime:s.mtimeMs};}).sort((a,b)=>b.mtime-a.mtime); }
