@@ -14,7 +14,7 @@
     "android:prepare": "node scripts/prepare-android.mjs",
     "android:add": "npm run android:prepare && npx cap add android && npm run android:prepare && node scripts/enable-android-http.mjs",
     "android:sync": "npm run android:prepare && npx cap sync android && node scripts/enable-android-http.mjs",
-    "lint": "node --check app.js && node --check server.js && node --check electron/main.cjs"
+    "lint": "node --check app.js && node --check server.js && node --check electron/main.cjs && node --check scripts/prepare-android.mjs && node --check scripts/enable-android-http.mjs"
   },
   "dependencies": {
     "express": "^4.21.2",
