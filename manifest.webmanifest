@@ -1,0 +1,17 @@
+{
+  "name": "跨端快传",
+  "short_name": "跨端快传",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f4f8fd",
+  "theme_color": "#f4f8fd",
+  "description": "Android 与 Windows 局域网文件传输工具",
+  "icons": [
+    {
+      "src": "assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
