@@ -1,0 +1,69 @@
+{
+  "name": "kuaduankuaichuan",
+  "version": "0.1.0",
+  "private": true,
+  "description": "跨端快传：Android 与 Windows 局域网文件传输",
+  "main": "electron/main.cjs",
+  "author": "greatwy8888",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "start:web": "node server.js",
+    "dist:win": "electron-builder --win nsis",
+    "dist:portable": "electron-builder --win portable",
+    "android:prepare": "node scripts/prepare-android.mjs",
+    "android:add": "npm run android:prepare && npx cap add android",
+    "android:sync": "npm run android:prepare && npx cap sync android",
+    "lint": "node --check app.js && node --check server.js && node --check electron/main.cjs"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "multer": "^1.4.5-lts.1",
+    "qrcode": "^1.5.4"
+  },
+  "devDependencies": {
+    "@capacitor/android": "^6.2.0",
+    "@capacitor/cli": "^6.2.0",
+    "@capacitor/core": "^6.2.0",
+    "electron": "^33.2.1",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.greatwy8888.kuaduankuaichuan",
+    "productName": "跨端快传",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "index.html",
+      "styles.css",
+      "app.js",
+      "manifest.webmanifest",
+      "assets/**/*",
+      "electron/**/*",
+      "server.js",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "assets/icon.png",
+        "to": "icon.png"
+      }
+    ],
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ],
+      "icon": "assets/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    },
+    "asar": true,
+    "compression": "maximum"
+  }
+}
