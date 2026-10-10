@@ -1,0 +1,8 @@
+{
+  "appId": "com.greatwy8888.kuaduankuaichuan",
+  "appName": "跨端快传",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "http"
+  }
+}
