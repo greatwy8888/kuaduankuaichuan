@@ -1,0 +1,10 @@
+node_modules/
+dist/
+release/
+android/
+www/
+.env
+*.keystore
+*.jks
+*.p12
+*.pem
