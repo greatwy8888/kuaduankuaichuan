@@ -13,7 +13,7 @@ if (existsSync(root+'/AndroidManifest.xml')) {
 const gradle='android/app/build.gradle';
 if (existsSync(gradle)) {
  let g=await readFile(gradle,'utf8');
- if (!g.includes('org.nanohttpd:nanohttpd')) g=g.replace(/dependencies\\s*\\{/, m=>m+'\n    implementation "org.nanohttpd:nanohttpd:2.3.1"');
+ if (!g.includes('org.nanohttpd:nanohttpd')) g=g.replace('dependencies {', 'dependencies {\n    implementation "org.nanohttpd:nanohttpd:2.3.1"');
  await writeFile(gradle,g);
 }
 const javaDir=root+'/java/com/greatwy8888/kuaduankuaichuan';
